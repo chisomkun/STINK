@@ -16,7 +16,7 @@
         <button>Create</button>
         <p class="message">Already Registered? <a href="#">Login</a></p>
         </form>
-        <form class="login-form">
+        <form class="login-form" action="#" th:action="@{/get}">
             <label for="login-form">Login</label>
             <input type="text" th:field="${user.UserID}" placeholder="username"/>
             <input type="text" th:field="${user.Password}" placeholder="password"/>

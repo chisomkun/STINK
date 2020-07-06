@@ -1,6 +1,7 @@
 package com.stinkelectronics.helpdesk.model;
 
 import java.util.UUID;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 //test
 @Entity
 @Table(name="Account")
-public class Account {
+public class Account implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

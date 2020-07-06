@@ -1,5 +1,6 @@
 package com.stinkelectronics.helpdesk.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -8,38 +9,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
-import javax.persistence.SecondaryTables;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.Transient;;
 
 @Entity
 @Table(name="Profile")
-/*@SecondaryTable(name="Account")*/
+/*@SecondaryTable(name="Account")
 @SecondaryTables({
 	@SecondaryTable(name="Account", pkJoinColumns=@PrimaryKeyJoinColumn(name="UserAID")),
 	@SecondaryTable(name="RepairStatus", pkJoinColumns=@PrimaryKeyJoinColumn(name="RepairID"))
-})
-public class Profile{
+})*/
+public class Profile implements Serializable {
 	
-	@Id
+	//@Id
+	@Transient
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long generatedID;
+	
+	@Id
+	@Column(name="UserID")
+	private long userID;
+	
+	@OneToOne
+	@JoinColumn(name="role_RoleID", referencedColumnName="RoleID")
+	private Role role;
 	
 	@Transient
 	private Account account;
 	
-	@ManyToOne
-	@PrimaryKeyJoinColumn(name="RepairID", referencedColumnName="RepairID")
+	@Column(name="Username")
+	private String username;
+	
+	@OneToOne
+	//@Transient
 	private Repair repair;
-	
-	@Column(name="UserID")
-	private String UserID;
-	
-	@Column(name="RoleID")
-	private String RoleID;
 	
 	@Column(name="FirstName")
 	private String FirstName;
@@ -52,32 +56,28 @@ public class Profile{
 		
 		this.FirstName = FirstName;
 		
-		RoleID = ROLEID.CUSTOMER.name();
-		UserID = "defaultuser";
-		
-		repair = new Repair(this.UserID);
+		repair = new Repair(this.userID);
+		//RepairID = Repair.getRepairID();
 	}
 	
 	public Profile() {
 		account = new Account();
 		
-		RoleID = ROLEID.CUSTOMER.name();
-		UserID = "defaultuser";
-		
-		repair = new Repair(UserID);
+		repair = new Repair(userID);
+		//RepairID = Repair.getRepairID();
 	}
 	
 	//getters
 	
-	public String getUserID() {
-		return UserID;
+	public long getUserID() {
+		return userID;
 	}
 	
-	public String getRoleID() {
-		return RoleID;
+	public long getRoleID() {
+		return role.getRoleID();
 	}
 	
-	public UUID getRepairID(){
+	public long getRepairID(){
 		return repair.getRepairID();
 	}
 	
@@ -102,16 +102,17 @@ public class Profile{
 	}
 	
 	//Setters	
-	public void setUserID(String UserID) {
-		this.UserID = UserID;
+	public void setUserID(long UserID) {
+		this.userID = UserID;
 	}
 	
-	public void setRoleID(String RoleID) {
-		this.RoleID = RoleID;
+	public void setRoleID(long RoleID) {
+		role.setRoleID(RoleID);
 	}
 	
-	public void setRepairID(UUID RepairID) {
+	public void setRepairID(long RepairID) {
 		repair.setRepairID(RepairID);
+		//this.RepairID = Repair.getRepairID();
 	}
 	
 	public void setFirstName(String FirstName) {

@@ -1,19 +1,21 @@
 package com.stinkelectronics.helpdesk.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+//@SecondaryTable(name="Profile", pkJoinColumns=@PrimaryKeyJoinColumn(name="UserID"))
 @Entity
 @Table(name="RepairStatus")
-//@SecondaryTable(name="Profile", pkJoinColumns=@PrimaryKeyJoinColumn(name="UserID"))
-public class Repair {
+public class Repair implements Serializable{
 	
 	/*@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,39 +23,42 @@ public class Repair {
 	
 	@Id
 	@Column(name="RepairID")
-	private UUID RepairID;
+	private long repairID;
 	
 	@Column(name="EName")
 	private String Desc;
 	
-	@Column(name="Status")
+	//@Column(name="Status")
 	private String Status;
 	
-	@Column(name="ServiceID")
-	private String ServiceID;
+	//@Column(name="ServiceID")
+	private long ServiceID;
+	
+	@OneToOne
+	@JoinColumn(name="UserID", referencedColumnName="UserID")
+	private Profile profile;
 	
 	//@OneToOne
 	//@PrimaryKeyJoinColumn(name="UserID", referencedColumnName="UserID")
-	@Column(name="UserID")
-	private String UserID;
+	//@Column(name="UserID")
+	private long UserID;
 
-	public Repair(UUID RepairID, String Desc, String Status, String ServiceID, String UserID) {
-		this.RepairID = RepairID;
+	public Repair(long RepairID, String Desc, String Status, long ServiceID, long UserID) {
+		this.repairID = RepairID;
 		this.Desc = Desc;
 		this.Status = Status;
 		this.ServiceID = ServiceID;
 		this.UserID = UserID;
 	}
 	
-	public Repair(String UserID) {
-		RepairID = UUID.randomUUID();
-		ServiceID = "S1";
+	public Repair(long UserID) {
+		ServiceID = 1;
 		this.UserID = UserID;
 	}
 	
 	//getters
-	public UUID getRepairID() {
-		return RepairID;
+	public long getRepairID() {
+		return repairID;
 	}
 	
 	public String getDesc() {
@@ -64,17 +69,17 @@ public class Repair {
 		return Status;
 	}
 	
-	public String getServiceID() {
+	public long getServiceID() {
 		return ServiceID;
 	}
 	
-	public String getUserID() {
-		return UserID;
+	public long getUserID() {
+		return profile.getUserID();
 	}
 	
 	//setters
-	public void setRepairID(UUID RepairID) {
-		this.RepairID = RepairID;
+	public void setRepairID(long RepairID) {
+		this.repairID = RepairID;
 	}
 	
 	public void setDesc(String Desc) {
@@ -85,12 +90,13 @@ public class Repair {
 		this.Status = Status;
 	}
 	
-	public void setServiceID(String ServiceID) {
+	public void setServiceID(long ServiceID) {
 		this.ServiceID = ServiceID;
 	}
 	
-	public void setUserID(String UserID) {
+	public void setUserID(long UserID) {
 		this.UserID = UserID;
+		this.profile.setUserID(UserID);
 	}
 	
 }
