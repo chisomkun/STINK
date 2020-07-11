@@ -3,6 +3,7 @@ package com.stinkelectronics.helpdesk.model;
 import java.io.Serializable;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,8 +42,7 @@ public class Profile implements Serializable {
 	@Column(name="Username")
 	private String username;
 	
-	@OneToOne
-	//@Transient
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Repair repair;
 	
 	@Column(name="FirstName")
@@ -56,15 +56,22 @@ public class Profile implements Serializable {
 		
 		this.FirstName = FirstName;
 		
-		repair = new Repair(this.userID);
+		repair = new Repair(this);
 		//RepairID = Repair.getRepairID();
 	}
 	
 	public Profile() {
 		account = new Account();
 		
-		repair = new Repair(userID);
+		repair = new Repair(this);
 		//RepairID = Repair.getRepairID();
+	}
+	
+	public Profile(long UserID, Repair repair) {
+		account = new Account();
+		
+		this.userID = UserID;
+		this.repair = repair;
 	}
 	
 	//getters

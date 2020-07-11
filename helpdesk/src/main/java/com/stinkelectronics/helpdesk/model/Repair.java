@@ -41,19 +41,25 @@ public class Repair implements Serializable{
 	//@OneToOne
 	//@PrimaryKeyJoinColumn(name="UserID", referencedColumnName="UserID")
 	//@Column(name="UserID")
-	private long UserID;
+	//private long UserID;
 
 	public Repair(long RepairID, String Desc, String Status, long ServiceID, long UserID) {
-		this.repairID = RepairID;
+		//this.repairID = RepairID;
 		this.Desc = Desc;
 		this.Status = Status;
 		this.ServiceID = ServiceID;
-		this.UserID = UserID;
+		
+		this.profile.setUserID(UserID);
 	}
 	
 	public Repair(long UserID) {
 		ServiceID = 1;
-		this.UserID = UserID;
+		this.profile.setUserID(UserID);
+	}
+	
+	public Repair(Profile profile) {
+		ServiceID = 1;
+		this.profile = profile;
 	}
 	
 	//getters
@@ -95,7 +101,7 @@ public class Repair implements Serializable{
 	}
 	
 	public void setUserID(long UserID) {
-		this.UserID = UserID;
+		//this.UserID = UserID;
 		this.profile.setUserID(UserID);
 	}
 	
