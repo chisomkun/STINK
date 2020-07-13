@@ -1,4 +1,4 @@
-package com.stinkelectronics.helpdesk.controller;
+package com.stinkelectronics.helpdesk;
 
 //import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.stinkelectronics.helpdesk.controller.IndexController;
 
 //import com.stinkelectronics.helpdesk.HelpdeskApplication;
 
