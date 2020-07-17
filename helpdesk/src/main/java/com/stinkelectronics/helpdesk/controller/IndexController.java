@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.stinkelectronics.helpdesk.model.Profile;
+import com.stinkelectronics.helpdesk.model.Account;
 import com.stinkelectronics.helpdesk.repository.ProfileCRUDRepository;
 
 @Controller
@@ -19,17 +20,17 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/")
-	public String demo(Model profile) {
-		Profile user = new Profile();
-		profile.addAttribute("user", user);
+	public String demo(Model account) {
+		Account user = new Account();
+		account.addAttribute("user", user);
 		
 		return "index";
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveUser(@ModelAttribute("user") Profile rawProfile) {
-		Profile profile = new Profile(rawProfile.getFirstName(), rawProfile.getPassword(), rawProfile.getEmail());
-		profileCRUDRepository.save(profile);
+	public String saveUser(@ModelAttribute("user") Account rawAccount) {
+		Account account = new Account(rawAccount.getFirstName(), rawAccount.getPassword(), rawAccount.getEmail());
+		profileCRUDRepository.save(account);
 		return "landing";
 	}
 	

@@ -14,10 +14,10 @@ public class DataSourceConfig {
 	@Primary
 	public DataSource dataSource() {
 		return DataSourceBuilder.create()
-				.url("jdbc:sqlserver://helpproject.database.windows.net;database=HelpProject")
+				.url("jdbc:sqlserver://helpdeskstink.cluoanm7zo65.us-east-2.rds.amazonaws.com;database=StinkHelpDeskDB")
 				.driverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
-				.username("users")
-				.password("GroupStink1")
+				.username("admin")
+				.password("password")
 				.build();
 	}
 }

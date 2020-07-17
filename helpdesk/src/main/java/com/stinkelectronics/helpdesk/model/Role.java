@@ -1,6 +1,6 @@
 package com.stinkelectronics.helpdesk.model;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -10,34 +10,15 @@ import javax.persistence.Table;
 @Table(name="Role")
 public class Role {
 	
-	@Column(name="RoleID")
 	@Id
-	private long roleID;
+	@OneToOne(mappedBy="role", cascade = CascadeType.ALL)
+	private int RoleID;
 	
-	@OneToOne(mappedBy="role")
-	private Profile profile;
-
-	@Column(name="Job")
-	private String job;
+	private String Job;
 	
 	public Role() {
-		this.roleID = 1;
-		this.job = "customer";
+		this.RoleID = 1;
+		this.Job = "Customer";
 	}
 	
-	public long getRoleID() {
-		return roleID;
-	}
-
-	public void setRoleID(long roleID) {
-		this.roleID = roleID;
-	}
-	
-	public String getJob() {
-		return job;
-	}
-
-	public void setJob(String job) {
-		this.job = job;
-	}
 }

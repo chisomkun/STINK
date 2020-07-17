@@ -25,8 +25,4 @@ class IndexControllerTest {
 		throws Exception {
 			assertThat(controller).isNotNull();
 	}
-	      
-	
-	
-
 }

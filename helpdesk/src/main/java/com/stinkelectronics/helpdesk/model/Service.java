@@ -1,7 +1,9 @@
 package com.stinkelectronics.helpdesk.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -9,34 +11,14 @@ import javax.persistence.Table;
 public class Service {
 	
 	@Id
+	@OneToOne(mappedBy="service", cascade = CascadeType.ALL)
 	private long ServiceID;
 	
 	private String ServiceType;
 	
 	public Service() {
-		this.ServiceType = "Flash Drive Recovery";
+		this.ServiceID = 0;
+		this.ServiceType = "N/A";
 	}
 	
-	/*
-	public Service(ServiceID) {
-		this.ServiceID = ServiceID;
-		this.ServiceType = "Flash Drive Recovery";
-	}
-	*/
-
-	public long getServiceID() {
-		return ServiceID;
-	}
-
-	public void setServiceID(long serviceID) {
-		ServiceID = serviceID;
-	}
-
-	public String getServiceType() {
-		return ServiceType;
-	}
-
-	public void setServiceType(String serviceType) {
-		ServiceType = serviceType;
-	}
 }
