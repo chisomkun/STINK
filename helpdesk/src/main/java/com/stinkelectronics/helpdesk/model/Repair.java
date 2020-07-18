@@ -33,4 +33,31 @@ public class Repair implements Serializable{
 		this.service = new Service();
 	}
 	
+	public Repair(String ename, int stype) {
+		this.EName = ename;
+		this.Status = "0%";
+		
+		this.service = new Service(stype);
+	}
+	
+	public int getRepairID() {
+		return RepairID;
+	}
+	
+	public String getEName() {
+		return EName;
+	}
+
+	public void setEName(String eName) {
+		EName = eName;
+	}
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+	
 }

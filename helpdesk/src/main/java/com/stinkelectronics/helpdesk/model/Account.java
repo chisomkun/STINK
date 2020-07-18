@@ -1,6 +1,7 @@
 package com.stinkelectronics.helpdesk.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,28 +19,26 @@ public class Account implements Serializable{
 	
 	private String Password;
 	private String Email;
-	private String FirstName;
 	
 	//map UserID
 	@OneToOne
 	@JoinColumn(name="FK_UserID")
 	private Profile profile;
 	
-	public Account(String string, String string2, String string3){
+	public Account(){
 		this.Password = "defaultpassword";
 		this.Email = "defaultemail";
-		this.FirstName = "defaultuser";
 		
 		this.profile = new Profile();
 	}
-	public String getFirstName() {
-		return FirstName;
+	
+	public Account(String fName, String pw, String email) {
+		setFirstName(fName);
+		this.Password = pw;
+		this.Email = email;
 	}
 	
-	public void setFirstName(String name) {
-		this.FirstName = name;
-	}
-	
+	//native fields
 	public String getPassword() {
 		return Password;
 	}
@@ -55,7 +54,68 @@ public class Account implements Serializable{
 	public void setEmail(String email) {
 		this.Email = email;
 	}
-}
 	
+	//external fields
+	public String getFirstName() {
+		return profile.getFirstName();
+	}
+	
+	public void setFirstName(String name) {
+		this.profile.setFirstName(name);
+	}
+	
+	public String getLastName() {
+		return profile.getLastName();
+	}
+	
+	public void setLastName(String name) {
+		this.profile.setLastName(name);
+	}
+	
+	public String getUserID() {
+		return this.profile.getUserID();
+	}
+	
+	public void setUserID(String uid) {
+		this.profile.setUserID(uid);
+	}
+	
+	public int getUserAID() {
+		return UserAID;
+	}
+	
+	//role
+	public Role getRole() {
+		return this.profile.getRole();
+	}
+	
+	public int getRoleID() {
+		return this.profile.getRoleID();
+	}
+	
+	public void setRole(Role role) {
+		this.profile.setRole(role);
+	}
+	
+	public void updateRole(int rid) {
+		this.profile.updateRole(rid);
+	}
+	
+	//manage repair
+	public List<Repair> getRepairs() {
+		return this.profile.getRepairs();
+	}
+	
+	public void addRepair(Repair repair) {
+		this.profile.addRepair(repair);
+	}
+	
+	public void removeRepair(int rid) {
+		this.profile.removeRepair(rid);
+	}
+	
+	public void updateRepair(int rid, String ename, String status) {
+		this.profile.updateRepair(rid, ename, status);
+	}
 }
 

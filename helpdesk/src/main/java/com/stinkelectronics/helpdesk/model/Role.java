@@ -16,9 +16,36 @@ public class Role {
 	
 	private String Job;
 	
-	public Role() {
-		this.RoleID = 1;
-		this.Job = "Customer";
+	public Role(int roleid) {
+		updateJob(roleid);
+	}
+	
+	public void updateJob(int roleid) {
+		this.RoleID = roleid;
+		switch(roleid) {
+		case 1:
+			this.Job = "customer";
+			break;
+		case 2:
+			this.Job = "technician";
+		case 3:
+			this.Job = "administrator";
+		default:
+			this.Job = "customer";
+			this.RoleID = 1;
+		}
+	}
+	
+	public int getRoleID() {
+		return RoleID;
+	}
+	
+	public void setRoleID(int roleid) {
+		updateJob(roleid);
+	}
+	
+	public String getJob() {
+		return Job;
 	}
 	
 }
