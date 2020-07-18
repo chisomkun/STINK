@@ -30,6 +30,30 @@ public class Account implements Serializable{
 		
 		this.profile = new Profile();
 	}
+	public String getFirstName() {
+		return FirstName;
+	}
+	
+	public void setFirstName(String name) {
+		this.FirstName = name;
+	}
+	
+	public String getPassword() {
+		return Password;
+	}
+	
+	public void setPassword(String pw) {
+		this.Password = pw;
+	}
+	
+	public String getEmail() {
+		return Email;
+	}
+	
+	public void setEmail(String email) {
+		this.Email = email;
+	}
+}
 	
 }
 
