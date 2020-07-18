@@ -25,7 +25,7 @@ public class Account implements Serializable{
 	@JoinColumn(name="FK_UserID")
 	private Profile profile;
 	
-	public Account(){
+	public Account(String string, String string2, String string3){
 		this.Password = "defaultpassword";
 		this.Email = "defaultemail";
 		this.FirstName = "defaultuser";
