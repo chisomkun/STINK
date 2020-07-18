@@ -18,6 +18,7 @@ public class Account implements Serializable{
 	
 	private String Password;
 	private String Email;
+	private String FirstName;
 	
 	//map UserID
 	@OneToOne
