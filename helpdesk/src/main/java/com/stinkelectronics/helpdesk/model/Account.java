@@ -27,6 +27,7 @@ public class Account implements Serializable{
 	public Account(){
 		this.Password = "defaultpassword";
 		this.Email = "defaultemail";
+		this.FirstName = "defaultuser";
 		
 		this.profile = new Profile();
 	}
