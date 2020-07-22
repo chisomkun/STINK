@@ -15,10 +15,10 @@ public class Repair{
 	}
 
 	public Repair(String EName, String Status, int ServiceID) {
-		this.EName = "default repair";
-		this.Status = "N/A";
+		this.EName = EName;
+		this.Status = Status;
 
-		this.ServiceID = 0;
+		this.ServiceID = ServiceID;
 	}
 
 	public String getEName() {

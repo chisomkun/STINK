@@ -18,10 +18,10 @@ public class Account{
 	}
 
 	public Account(String Password, String Email, String UserID){
-		this.Password = "defaultpassword";
-		this.Email = "defaultemail";
+		this.Password = Password;
+		this.Email = Email;
 
-		this.UserID = "defaultuserid";
+		this.UserID = UserID;
 	}
 
 	public String getEmail() {

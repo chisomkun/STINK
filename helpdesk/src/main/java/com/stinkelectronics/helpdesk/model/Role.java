@@ -2,7 +2,7 @@ package com.stinkelectronics.helpdesk.model;
 
 public class Role {
 	
-	private Integer RoleID;
+	private int RoleID;
 	private String Job;
 	
 	public Role() {
@@ -10,16 +10,16 @@ public class Role {
 		this.Job = "N/A";
 	}
 
-	public Role(Integer RoleID, String Job) {
-		this.RoleID = 0;
-		this.Job = "N/A";
+	public Role(int RoleID, String Job) {
+		this.RoleID = RoleID;
+		this.Job = Job;
 	}
 
-	public Integer getRoleID() {
+	public int getRoleID() {
 		return RoleID;
 	}
 
-	public void setRoleID(Integer roleID) {
+	public void setRoleID(int roleID) {
 		RoleID = roleID;
 	}
 

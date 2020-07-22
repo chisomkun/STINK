@@ -10,7 +10,7 @@ public class Service {
 	 * 4- build
 	 * 5- software issue
 	 */
-	private Integer ServiceID;
+	private int ServiceID;
 	private String ServiceType;
 	
 	public Service() {
@@ -18,16 +18,16 @@ public class Service {
 		this.ServiceType = "N/A";
 	}
 
-	public Service(Integer ServiceID, String ServiceType) {
-		this.ServiceID = 0;
-		this.ServiceType = "N/A";
+	public Service(int ServiceID, String ServiceType) {
+		this.ServiceID = ServiceID;
+		this.ServiceType = ServiceType;
 	}
 
-	public Integer getServiceID() {
+	public int getServiceID() {
 		return ServiceID;
 	}
 
-	public void setServiceID(Integer serviceID) {
+	public void setServiceID(int serviceID) {
 		ServiceID = serviceID;
 	}
 

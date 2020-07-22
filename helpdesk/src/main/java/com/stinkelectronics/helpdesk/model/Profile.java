@@ -23,13 +23,13 @@ public class Profile{
 	}
 
 	public Profile(String UserID, String FirstName, String LastName, int RoleID, int RepairID) {
-		this.UserID = "defaultuserid";
+		this.UserID = UserID;
 
-		this.FirstName = "defaultfirstname";
-		this.LastName = "defaultlastname";
+		this.FirstName = FirstName;
+		this.LastName = LastName;
 
-		this.RoleID = 1;
-		this.RepairID = 0;
+		this.RoleID = RoleID;
+		this.RepairID = RepairID;
 	}
 
 	public String getUserID() {
