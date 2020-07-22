@@ -3,7 +3,7 @@ package com.stinkelectronics.helpdesk.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import service.AccountDao;
+import com.stinkelectronics.helpdesk.service.AccountDao;
 
 @Controller
 public class LoginController {

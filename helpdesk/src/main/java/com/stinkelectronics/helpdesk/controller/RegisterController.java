@@ -3,8 +3,8 @@ package com.stinkelectronics.helpdesk.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import service.AccountDao;
-import service.ProfileDao;
+import com.stinkelectronics.helpdesk.service.AccountDao;
+import com.stinkelectronics.helpdesk.service.ProfileDao;
 
 @Controller
 public class RegisterController {

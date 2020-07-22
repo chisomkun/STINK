@@ -1,4 +1,4 @@
-package service;
+package com.stinkelectronics.helpdesk.service;
 
 import java.sql.ResultSet;
 import org.springframework.jdbc.core.RowMapper;
