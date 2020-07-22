@@ -12,6 +12,21 @@ public class Role {
 	
 	//TODO:
 		//constructor with all parameters
-		//getters and setters
-	
+
+
+	public Integer getRoleID() {
+		return RoleID;
+	}
+
+	public void setRoleID(Integer roleID) {
+		RoleID = roleID;
+	}
+
+	public String getJob() {
+		return Job;
+	}
+
+	public void setJob(String job) {
+		Job = job;
+	}
 }

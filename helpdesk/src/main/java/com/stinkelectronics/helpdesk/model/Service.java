@@ -20,6 +20,21 @@ public class Service {
 	
 	//TODO:
 		//constructor with all parameters
-		//getters and setters
-	
+
+
+	public Integer getServiceID() {
+		return ServiceID;
+	}
+
+	public void setServiceID(Integer serviceID) {
+		ServiceID = serviceID;
+	}
+
+	public String getServiceType() {
+		return ServiceType;
+	}
+
+	public void setServiceType(String serviceType) {
+		ServiceType = serviceType;
+	}
 }

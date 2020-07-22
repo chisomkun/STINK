@@ -16,6 +16,29 @@ public class Repair{
 	
 	//TODO:
 		//constructor with all parameters
-		//getters and setters
-	
+
+
+	public String getEName() {
+		return EName;
+	}
+
+	public void setEName(String EName) {
+		this.EName = EName;
+	}
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+
+	public int getServiceID() {
+		return ServiceID;
+	}
+
+	public void setServiceID(int serviceID) {
+		ServiceID = serviceID;
+	}
 }

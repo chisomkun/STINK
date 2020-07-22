@@ -19,11 +19,49 @@ public class Profile{
 		this.LastName = "defaultlastname";
 		
 		this.RoleID = 1;
-		this.RepairID = 0;;
+		this.RepairID = 0;
 	}
 	
 	//TODO:
 		//constructor with all parameters
-		//getters and setters
-	
+
+	public String getUserID() {
+		return UserID;
+	}
+
+	public void setUserID(String userID) {
+		UserID = userID;
+	}
+
+	public String getFirstName() {
+		return FirstName;
+	}
+
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
+	}
+
+	public String getLastName() {
+		return LastName;
+	}
+
+	public void setLastName(String lastName) {
+		LastName = lastName;
+	}
+
+	public int getRoleID() {
+		return RoleID;
+	}
+
+	public void setRoleID(int roleID) {
+		RoleID = roleID;
+	}
+
+	public int getRepairID() {
+		return RepairID;
+	}
+
+	public void setRepairID(int repairID) {
+		RepairID = repairID;
+	}
 }
