@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.stinkelectronics.helpdesk.model.Profile;
 import com.stinkelectronics.helpdesk.model.Account;
-import com.stinkelectronics.helpdesk.repository.ProfileCRUDRepository;
+import com.stinkelectronics.helpdesk.repository.AccountCRUDRepository;
 
 @Controller
 public class IndexController {
 
-	private final ProfileCRUDRepository profileCRUDRepository;
+	private final AccountCRUDRepository profileCRUDRepository;
 	
-	public IndexController(ProfileCRUDRepository profileCRUDRepository) {
+	public IndexController(AccountCRUDRepository profileCRUDRepository) {
 		this.profileCRUDRepository = profileCRUDRepository;
 	}
 	
