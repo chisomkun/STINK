@@ -13,10 +13,13 @@ public class Repair{
 		
 		this.ServiceID = 0;
 	}
-	
-	//TODO:
-		//constructor with all parameters
 
+	public Repair(String EName, String Status, int ServiceID) {
+		this.EName = "default repair";
+		this.Status = "N/A";
+
+		this.ServiceID = 0;
+	}
 
 	public String getEName() {
 		return EName;

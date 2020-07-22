@@ -16,9 +16,13 @@ public class Account{
 		
 		this.UserID = "defaultuserid";
 	}
-	
-	//TODO:
-	//constructor with all parameters
+
+	public Account(String Password, String Email, String UserID){
+		this.Password = "defaultpassword";
+		this.Email = "defaultemail";
+
+		this.UserID = "defaultuserid";
+	}
 
 	public String getEmail() {
 		return Email;

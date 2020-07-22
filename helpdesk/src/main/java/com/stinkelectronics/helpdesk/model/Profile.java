@@ -21,9 +21,16 @@ public class Profile{
 		this.RoleID = 1;
 		this.RepairID = 0;
 	}
-	
-	//TODO:
-		//constructor with all parameters
+
+	public Profile(String UserID, String FirstName, String LastName, int RoleID, int RepairID) {
+		this.UserID = "defaultuserid";
+
+		this.FirstName = "defaultfirstname";
+		this.LastName = "defaultlastname";
+
+		this.RoleID = 1;
+		this.RepairID = 0;
+	}
 
 	public String getUserID() {
 		return UserID;

@@ -17,10 +17,11 @@ public class Service {
 		this.ServiceID = 0;
 		this.ServiceType = "N/A";
 	}
-	
-	//TODO:
-		//constructor with all parameters
 
+	public Service(Integer ServiceID, String ServiceType) {
+		this.ServiceID = 0;
+		this.ServiceType = "N/A";
+	}
 
 	public Integer getServiceID() {
 		return ServiceID;

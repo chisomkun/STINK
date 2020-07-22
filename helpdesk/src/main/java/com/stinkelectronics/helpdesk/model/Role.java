@@ -9,10 +9,11 @@ public class Role {
 		this.RoleID = 0;
 		this.Job = "N/A";
 	}
-	
-	//TODO:
-		//constructor with all parameters
 
+	public Role(Integer RoleID, String Job) {
+		this.RoleID = 0;
+		this.Job = "N/A";
+	}
 
 	public Integer getRoleID() {
 		return RoleID;
