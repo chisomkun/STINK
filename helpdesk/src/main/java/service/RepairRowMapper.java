@@ -8,12 +8,12 @@ import com.stinkelectronics.helpdesk.model.Repair;
 public class RepairRowMapper implements RowMapper<Repair> {
 
     @Override
-    public Repair mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public Repair mapRow(ResultSet rs, int rNum) throws SQLException {
 
         Repair r = new Repair();
-        r.setEName(r.getEName("EName"));
-        r.setStatus(r.getStatus("Status"));
-        r.setServiceID(r.getServiceID("ServiceID"));
+        r.setEName(rs.getString("EName"));
+        r.setStatus(rs.getString("Status"));
+        r.setServiceID(rs.getInt("ServiceID"));
         return r;
     }
 }
