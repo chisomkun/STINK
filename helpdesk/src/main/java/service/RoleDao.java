@@ -11,8 +11,7 @@ import com.stinkelectronics.helpdesk.model.Role;
 @Repository
 @Configuration
 public class RoleDao {
-	@
-	Autowired
+	@Autowired
 	private JdbcTemplate jtemp;
 	
 	//query by User ID (Unique)
