@@ -10,7 +10,7 @@
     <div class="form">
         <form class="registration-form" action="#" th:action="@{/save}" th:object="${user}" method="post">
         <label for="registration-form">Register</label>
-        <input type="text" th:field="${user.FirstName}" placeholder="first name"/>
+        <input type="text" th:field="${user.UserID}" placeholder="firstname"/>
         <input type="text" th:field="${user.Password}" placeholder="password"/>
         <input type="text" th:field="${user.Email}" placeholder="email"/>
         <button>Create</button>
