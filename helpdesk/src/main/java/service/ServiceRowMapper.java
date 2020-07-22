@@ -13,7 +13,7 @@ public class ServiceRowMapper implements RowMapper<Service> {
 	public Service mapRow(ResultSet a, int rowA) throws SQLException {
 		Service srvc = new Service();
 		srvc.setServiceID(a.getInt("ServiceID"));
-		srvc.setServiceType(a.getString("Password"));
+		srvc.setServiceType(a.getString("ServiceType"));
 		return srvc;
 	}
 	
