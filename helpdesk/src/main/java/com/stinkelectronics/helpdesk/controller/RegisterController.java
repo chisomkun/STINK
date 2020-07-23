@@ -11,12 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import sun.jvm.hotspot.asm.Register;
 
 
 @Controller
-@SessionAttributes("sessionUser")
 public class RegisterController {
 
 	@Autowired
@@ -30,7 +28,6 @@ public class RegisterController {
 	public String accCheck(Model model) {
 			model.addAttribute("account", new Account());
 			model.addAttribute("profile", new Profile());
-
 
 		return "/Register";
 	}
