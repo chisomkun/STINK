@@ -32,19 +32,6 @@ public class RegisterController {
 		return "/Register";
 	}
 		//post register
-		@PostMapping()
-		public String accRegister (@ModelAttribute Account account, @ModelAttribute Profile profile){
-			if (account.getPassword() == null || account.getUserID() == null) {
-				//broadcast that required fields are left empty
-				return "/Register";
-			}
 
-			if (!accdao.isUserIdExists(account.getUserID())) {
-				accdao.postAccount(account,profile);
-
-			}
-
-			return "/Register";
-		}
 	}
 
