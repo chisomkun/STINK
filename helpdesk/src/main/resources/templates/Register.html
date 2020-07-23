@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Help Desk Login</title>
-        <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="Login.css">
+    <meta charset="UTF-8"/>
 </head>
 <body>
     <div class="login-page">
     <div class="form">
-        <form>
-        <label form="registration-form">Register</label>
-        <input type="text" name="username" class="input-box" placeholder="Username" required/><br>
-        <input type="text" name="firstName" class="input-box" placeholder="First Name" required/><br>
-        <input type="text" name="lastName" class="input-box" placeholder="Last Name" required/><br>
-        <input type="password" name="userpass" class="input-box" placeholder="Password" required/><br>
-        <input type="text" name="useremail" class="input-box" placeholder="Email Address" required/><br>
-        <input type="submit" name="signup-btn" class="btn" value="Signup"/><br>
-        <p class="message">Already Registered? <a href="Login.html">Login</a></p>
+        <form action="#" th:action="@{/registeraccount}" th:object="${user}">
+        	<label form="registration-form">Register</label>
+        	<input type="text" name="username" class="input-box" placeholder="Username" th:field="*{user[0].UserID}" required/><br>
+        	<input type="text" name="firstName" class="input-box" placeholder="First Name" th:field="*{user[1].FirstName}" required/><br>
+        	<input type="text" name="lastName" class="input-box" placeholder="Last Name" th:field="*{user[1].LastName}" required/><br>
+        	<input type="password" name="userpass" class="input-box" placeholder="Password" th:field="*{user[0].Password}" required/><br>
+        	<input type="text" name="useremail" class="input-box" placeholder="Email Address" th:field="*{user[0].Email}" required/><br>
+        	<input type="submit" name="signup-btn" class="btn" value="Signup"/><br>
+        	<p class="message">Already Registered? <a href="Login.html">Login</a></p>
         </form>
         </div>
     </div>

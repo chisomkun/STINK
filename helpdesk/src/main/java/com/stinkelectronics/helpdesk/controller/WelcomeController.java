@@ -32,7 +32,7 @@ public class WelcomeController {
 	public Profile makeSessionProfile() {return new Profile();}
 
 
-	@GetMapping
+	@GetMapping("welcome")
 	public String findingName(Model model, @ModelAttribute("sessionProfile") Profile sessionProfile) {
 
 		model.addAttribute("profile", new Profile());
