@@ -55,4 +55,17 @@ public class ProfileDao {
 			return profile;
 		}
 	}
+	
+	//posts
+	public boolean postProfile(Profile profile) {
+		try {
+			String query = "INSERT INTO Profile (UserID, FirstName, LastName, RoleID, RepairID) VALUES ('" + profile.getUserID() + "', '" +  profile.getFirstName() + "', '" + profile.getLastName() + "', '1', '0')";
+			jtemp.execute(query);
+			return true;
+		}
+		catch(DataAccessException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 }

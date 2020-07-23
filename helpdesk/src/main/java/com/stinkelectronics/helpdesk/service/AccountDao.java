@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.stinkelectronics.helpdesk.model.Account;
+import com.stinkelectronics.helpdesk.model.Profile;
 
 @Configuration
 @Repository
@@ -15,6 +16,10 @@ public class AccountDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
+	private ProfileDao profileDao;
+	
+	//gets
 	public Account getAccountByUserID(String UserID) {
 		try {
 			String a = "SELECT * FROM account WHERE UserID=?";
@@ -51,6 +56,19 @@ public class AccountDao {
 		}
 		catch(DataAccessException ex) {
 			System.out.println(ex.getMessage());
+			return false;
+		}
+	}
+	
+	//posts
+	public boolean postAccount(Account account, Profile profile) {
+		try {
+			String query = "INSERT INTO Account (Email, Password, UserID) VALUES ('" + account.getEmail() + "', '" + account.getPassword() + "', '" + account.getUserID() + "')";
+			jdbcTemplate.execute(query);
+			return profileDao.postProfile(profile);
+		}
+		catch(DataAccessException e) {
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
