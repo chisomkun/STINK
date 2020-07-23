@@ -13,26 +13,26 @@ import com.stinkelectronics.helpdesk.model.Profile;
 import com.stinkelectronics.helpdesk.service.AccountDao;
 
 @Controller
-@SessionAttributes("sesssionUser")
+@SessionAttributes("sesssionProfile")
 public class LoginController {
 	
 	@Autowired
 	private AccountDao accdao;
 	
 	//get login
-	@GetMapping("/")
+	@GetMapping("/Login")
 	public String loginForm(Model m) {
 		m.addAttribute("account", new Account());
-		return "/";
+		return "Login";
 	}
 	
 	//post login
-	@PostMapping("/")
-	public String loginPost(@ModelAttribute Account account) {
+	@PostMapping("/LoginPost")
+	public String loginPost(@ModelAttribute Account account, @ModelAttribute Profile sessionProfile) {
 		//null check
 		if(account.getPassword() == null || account.getUserID() == null) {
 			//broadcast that required fields are left empty
-			return "/";
+			return "Login";
 		}
 		
 		//length check
@@ -40,23 +40,24 @@ public class LoginController {
 		//userid max 35 char
 		if(account.getPassword().length() > 12 || account.getUserID().length() > 35) {
 			//broadcast that respective field is too long
-			return "/";
+			return "Login";
 		}
 		
 		if(accdao.isUserIdExists(account.getUserID())) {
 			//check if password matches account
 			if(account.getPassword().contentEquals(accdao.getAccountByUserID(account.getUserID()).getPassword())) {
 				//login session user
-				return "/";
+				//authenticate
+				return "welcome";
 			}
 			else {
 				//broadcast that password does not match userid
-				return "/";
+				return "Login";
 			}
 		}
 		else {
 			//broadcast that no such user with userID exists
-			return "/";
+			return "Login";
 		}
 	}
 }

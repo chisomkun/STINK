@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8" />
     <title>Help Desk Login</title>   
     <link rel="stylesheet" href="Login.css">
 </head>
 <body>
     <div class="login-page">
     <div class="form">
-        <form action="database conn.php" method="post">
+        <form th:action="@{/LoginPost}" th:object="${account}" method="post">
             <label form="login-form">Login</label><br /><br />
-            <input type="text" name="username" class="input-box" placeholder="Username" required/>
-            <input type="password" name="password" class="input-box" placeholder="password" required/>
-            <button><a href="help.html">Login</a></button>
+            <input type="text" name="username" class="input-box" placeholder="Username" th:field="*{UserID}" required/>
+            <input type="password" name="password" class="input-box" placeholder="password" th:field="*{Password}" required/>
+            <button><a th:href="/help">Login</a></button>
             <p class="message">Not Registered?<a href="Register.html">Register</a></p>
         </form>
         </div>
