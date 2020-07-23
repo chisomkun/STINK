@@ -2,6 +2,7 @@ package com.stinkelectronics.helpdesk.controller;
 
 import com.stinkelectronics.helpdesk.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 
 import com.stinkelectronics.helpdesk.service.ProfileDao;
@@ -16,16 +17,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("sessionProfile")
 public class WelcomeController {
-	
+
 	@Autowired
 	private ProfileDao profdao;
-	
+
 	@Autowired
 	private RepairDao repairdao;
-	
+
 	@Autowired
 	private RoleDao roledao;
-	
+
 	//get welcome
 	@ModelAttribute ("sessionProfile")
 	public Profile makeSessionProfile() {return new Profile();}
