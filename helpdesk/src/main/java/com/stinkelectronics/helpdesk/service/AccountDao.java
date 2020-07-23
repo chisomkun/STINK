@@ -15,31 +15,43 @@ public class AccountDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public Account getAccountbyUserID(String UserID) {
+	public Account getAccountByUserID(String UserID) {
 		try {
-			String a = "SELECT * FROM account WHERE UserID =?";
+			String a = "SELECT * FROM account WHERE UserID=?";
 				return jdbcTemplate.queryForObject(a, new Object[] {UserID}, new AccountRowMapper()); 
 		}catch (DataAccessException ex) {
 			System.out.println(ex.getMessage());
 			return new Account();
 		}
 	}
-	public Account getAccountbyEmail(String Email) {
+	public Account getAccountByEmail(String Email) {
 		try {
-			String b = "SELECT * FROM account WHERE Email =?";
+			String b = "SELECT * FROM account WHERE Email=?";
 			return jdbcTemplate.queryForObject(b, new Object[] {Email}, new AccountRowMapper());
 		}catch (DataAccessException ex) {
 			System.out.println(ex.getMessage());
 			return new Account();
 		}
 	}	
-	public Account getAccountbyPassword(String Password) {
+	public Account getAccountByPassword(String Password) {
 		try {
-			String c = "SELECT * FROM account WHERE Password =?";
+			String c = "SELECT * FROM account WHERE Password=?";
 			return jdbcTemplate.queryForObject(c, new Object[] {Password}, new AccountRowMapper());
 		}catch (DataAccessException ex) {
 			System.out.println(ex.getMessage());
 			return new Account();
+		}
+	}
+	
+	public boolean isUserIdExists(String UserID) {
+		try {
+			String query = "SELECT * FROM account WHERE UserID=?";
+			int count = jdbcTemplate.queryForObject(query, new Object[] {UserID}, Integer.class);
+			return count > 0;
+		}
+		catch(DataAccessException ex) {
+			System.out.println(ex.getMessage());
+			return false;
 		}
 	}
 }
