@@ -12,24 +12,31 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.stinkelectronics.helpdesk.model.Account;
 import com.stinkelectronics.helpdesk.model.Profile;
 import com.stinkelectronics.helpdesk.service.AccountDao;
+import com.stinkelectronics.helpdesk.service.ProfileDao;
 
 @Controller
-@SessionAttributes("sesssionProfile")
+@SessionAttributes("sessionProfile")
 public class LoginController {
 	
 	@Autowired
 	private AccountDao accdao;
 	
+	@Autowired
+	private ProfileDao profdao;
+	
+	@ModelAttribute("sessionProfile")
+	public Profile makeSessionProfile() {return new Profile();}
+	
 	//get login
-	@GetMapping
-	public String loginForm(Model m) {
+	@GetMapping("/")
+	public String loginForm(Model m, @ModelAttribute("sessionProfile") Profile sessionProfile) {
 		m.addAttribute("account", new Account());
 		return "Login";
 	}
 	
 	//post login
-	@PostMapping("/LoginPost")
-	public String loginPost(@ModelAttribute Account account, @ModelAttribute Profile sessionProfile) {
+	@PostMapping("/Login")
+	public String loginPost(@ModelAttribute Account account, @ModelAttribute("sessionProfile") Profile sessionProfile) {
 		//null check
 		if(account.getPassword() == null || account.getUserID() == null) {
 			//broadcast that required fields are left empty
@@ -48,6 +55,7 @@ public class LoginController {
 			//check if password matches account
 			if(account.getPassword().contentEquals(accdao.getAccountByUserID(account.getUserID()).getPassword())) {
 				//login session user
+				sessionProfile = profdao.getProfileByUserID(account.getUserID());
 				//authenticate
 				return "welcome";
 			}
@@ -60,5 +68,10 @@ public class LoginController {
 			//broadcast that no such user with userID exists
 			return "Login";
 		}
+	}
+	
+	@RequestMapping("/Register")
+	public String register() {
+		return "Register";
 	}
 }

@@ -32,16 +32,15 @@ public class WelcomeController {
 	public Profile makeSessionProfile() {return new Profile();}
 
 
-	@GetMapping("welcome")
+	@GetMapping("/welcome")
 	public String findingName(Model model, @ModelAttribute("sessionProfile") Profile sessionProfile) {
-
-		model.addAttribute("profile", new Profile());
-		Profile user = new Profile();
-		user.setUserID(sessionProfile.getUserID());
-
-		return "/Welcome";
+		return "welcome";
 
 	}
 	//post welcome
+	@PostMapping("/welcome")
+	public String welcomePost(@ModelAttribute("sessionProfile") Profile sessionProfile) {
+		return "welcome";
+	}
 
 }

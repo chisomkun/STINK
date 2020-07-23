@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Account{
+	//UserAID PK
 	
 	private String Email;
 	private String Password;
 	
-	private String UserID;
+	private String UserID; //FK
 	
 	public Account(){
 		this.Password = "defaultpassword";

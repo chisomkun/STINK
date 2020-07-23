@@ -28,45 +28,25 @@ public class RegisterController {
 	private ArrayList<Object> user;
 
 	//get register
-	@GetMapping("register")
+	@GetMapping("/Register")
 	public String accCheck(Model model) {
-		
+		/*
 		user.add(new Account());
 		user.add(new Profile());
-		model.addAttribute("user", user);
-
-		return "Register";
-	}
-	//post register
-	@PostMapping()
-	public String accRegister (@ModelAttribute ArrayList<Object> user){
-		Account account = (Account) user.get(0);
-		Profile profile = (Profile) user.get(1);
-		
-		profile.setUserID(account.getUserID());
-		
-		if (account.getPassword() == null || account.getUserID() == null) {
-			//broadcast that required fields are left empty
-			return "Register";
-		}
-
-		if (!accdao.isUserIdExists(account.getUserID())) {
-			accdao.postAccount(account,profile);
-			return "Login";
-		}
+		model.addAttribute("user", user);*/
+		model.addAttribute("account", new Account());
+		model.addAttribute("profile", new Profile());
 
 		return "Register";
 	}
 	
-	@RequestMapping(value="/registeraccount")
-	public String registerAccount(@ModelAttribute ArrayList<Object> user) {
-		Account account = (Account) user.get(0);
-		Profile profile = (Profile) user.get(1);
+	@PostMapping("/Register")
+	public String registerAccount(@ModelAttribute Account account, @ModelAttribute Profile profile) {
 		
-		profile.setUserID(account.getUserID());
+		//profile.setUserID(account.getUserID());
 		
 		//nullcheck
-		if (account.getPassword() == null || account.getUserID() == null) {
+		if (profile.getFirstName() == null || profile.getLastName() == null || profile.getUserID() == null) {
 			//broadcast that required fields are left empty
 			return "Register";
 		}
@@ -74,8 +54,9 @@ public class RegisterController {
 		//lengthcheck
 
 		if (!accdao.isUserIdExists(account.getUserID())) {
-			accdao.postAccount(account,profile);
-			return "Login";
+			if(profdao.postProfile(profile)) {
+				return "Login";
+			}
 		}
 		return "Register";
 	}
