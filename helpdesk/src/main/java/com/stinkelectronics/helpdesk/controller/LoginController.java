@@ -6,11 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.stinkelectronics.helpdesk.model.Account;
+import com.stinkelectronics.helpdesk.model.Profile;
 import com.stinkelectronics.helpdesk.service.AccountDao;
 
 @Controller
+@SessionAttributes("sesssionUser")
 public class LoginController {
 	
 	@Autowired
@@ -47,7 +50,7 @@ public class LoginController {
 				return "/";
 			}
 			else {
-				//broadcast that password does nto match userid
+				//broadcast that password does not match userid
 				return "/";
 			}
 		}
