@@ -43,8 +43,5 @@ public class WelcomeController {
 
 	}
 	//post welcome
-	@PostMapping
-	public String displayName(Profile sessionProfile){
-		return sessionProfile.getFirstName();
-	}
+
 }
