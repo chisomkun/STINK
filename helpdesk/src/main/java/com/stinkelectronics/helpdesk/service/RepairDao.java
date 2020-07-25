@@ -27,4 +27,43 @@ public class RepairDao {
     }
     /*Queries for RepairByUserID
     */
+    
+    public boolean addRepair(Repair repair) {
+    	try {
+    		String insert = "INSERT INTO Repair (Service, EName, Status) VALUES ('" + repair.getServiceID() + "', '" + repair.getEName() + "', '" + repair.getStatus() + "')";
+    		jtem.execute(insert);
+    		return true;
+    	}
+    	catch(DataAccessException e) {
+    		System.out.println(e.getMessage());
+    		return false;
+    	}
+    }
+    
+    public boolean removeRepair(int RepairID) {
+    	
+    	try {
+    		String remove = "REMOVE FROM Repair WHERE RepairID='" + RepairID+ "'";
+    		jtem.execute(remove);
+    		return true;
+    	}
+    	catch(DataAccessException e) {
+    		System.out.println(e.getMessage());
+    		return false;
+    	}
+    }
+    
+    public boolean updateRepairStatus(int RepairID, String Status) {
+    	try {
+    		String update = "UPDATE Repair " + 
+    				"SET Status='"+ Status +"' " + 
+    				"WHERE CustomerID='" + RepairID + "'";
+    		jtem.execute(update);
+    		return true;
+    	}
+    	catch(DataAccessException e) {
+    		System.out.println(e.getMessage());
+    		return false;
+    	}
+    }
 }

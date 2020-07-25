@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.stinkelectronics.helpdesk.model.Account;
 import com.stinkelectronics.helpdesk.model.Profile;
 
 @Repository
@@ -56,11 +57,57 @@ public class ProfileDao {
 		}
 	}
 	
+	public Profile getProfileByEmail(String Email) {
+		try {
+			String b = "SELECT * FROM Profile WHERE Email=?";
+			return jtemp.queryForObject(b, new Object[] {Email}, new ProfileRowMapper());
+		}catch (DataAccessException ex) {
+			System.out.println(ex.getMessage());
+			return new Profile();
+		}
+	}
+	
+	//exists
+	public boolean isUserIdExists(String UserID) {
+		try {
+			String query = "SELECT * FROM Profile WHERE UserID=?";
+			int count = jtemp.queryForObject(query, new Object[] {UserID}, Integer.class);
+			return count > 0;
+		}
+		catch(DataAccessException ex) {
+			System.out.println(ex.getMessage());
+			return false;
+		}
+	}
+	
 	//posts
+	
+	//create customer profile with no repairs
 	public boolean postProfile(Profile profile) {
 		try {
-			String query = "INSERT INTO Profile (UserID, FirstName, LastName, RoleID, RepairID) VALUES ('" + profile.getUserID() + "', '" +  profile.getFirstName() + "', '" + profile.getLastName() + "', '1', '0')";
+			String query = "INSERT INTO Profile (UserID, FirstName, LastName, Email, Password, RoleID, RepairID) VALUES ('" 
+					+ profile.getUserID() + "', '" 
+					+ profile.getFirstName() + "', '" 
+					+ profile.getLastName() + "', '" 
+					+ profile.getEmail() + "', '"
+					+ profile.getPassword()
+					+ "', '1', '0')";
 			jtemp.execute(query);
+			return true;
+		}
+		catch(DataAccessException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	//updates specified column of profile(by userid) with specified value
+	public boolean updateProfile(String uid, String columnName, String update) {
+		try {
+			String sql = "UPDATE Profile " + 
+					"SET " + columnName + "='"
+					+ update + "' "
+					+ "WHERE UserID='" + uid + "'";
 			return true;
 		}
 		catch(DataAccessException e) {

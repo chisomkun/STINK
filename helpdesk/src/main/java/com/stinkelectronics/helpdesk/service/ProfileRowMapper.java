@@ -16,6 +16,10 @@ public class ProfileRowMapper implements RowMapper<Profile>{
 		profile.setUserID(set.getString("UserID"));
 		profile.setFirstName(set.getString("FirstName"));
 		profile.setLastName(set.getString("LastName"));
+		
+		profile.setEmail(set.getString("Email"));
+		profile.setPassword(set.getString("Password"));
+		
 		profile.setRepairID(set.getInt("RepairID"));
 		profile.setRoleID(set.getInt("RoleID"));
 		
