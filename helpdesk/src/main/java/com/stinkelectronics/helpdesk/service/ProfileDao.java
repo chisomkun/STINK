@@ -6,7 +6,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.stinkelectronics.helpdesk.model.Account;
 import com.stinkelectronics.helpdesk.model.Profile;
 
 @Repository

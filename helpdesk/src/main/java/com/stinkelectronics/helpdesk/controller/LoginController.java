@@ -9,17 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.stinkelectronics.helpdesk.model.Account;
 import com.stinkelectronics.helpdesk.model.Profile;
-import com.stinkelectronics.helpdesk.service.AccountDao;
 import com.stinkelectronics.helpdesk.service.ProfileDao;
 
 @Controller
 @SessionAttributes("sessionProfile")
 public class LoginController {
-	
-	@Autowired
-	private AccountDao accdao;
 	
 	@Autowired
 	private ProfileDao profdao;
@@ -30,15 +25,15 @@ public class LoginController {
 	//get login
 	@GetMapping("/")
 	public String loginForm(Model m, @ModelAttribute("sessionProfile") Profile sessionProfile) {
-		m.addAttribute("account", new Account());
+		m.addAttribute("profile", new Profile());
 		return "Login";
 	}
 	
 	//post login
 	@PostMapping("/Login")
-	public String loginPost(@ModelAttribute Account account, @ModelAttribute("sessionProfile") Profile sessionProfile) {
+	public String loginPost(@ModelAttribute Profile profile, @ModelAttribute("sessionProfile") Profile sessionProfile) {
 		//null check
-		if(account.getPassword() == null || account.getUserID() == null) {
+		if(profile.getPassword() == null || profile.getUserID() == null) {
 			//broadcast that required fields are left empty
 			return "Login";
 		}
@@ -46,16 +41,16 @@ public class LoginController {
 		//length check
 		//password max 12 char
 		//userid max 35 char
-		if(account.getPassword().length() > 12 || account.getUserID().length() > 35) {
+		if(profile.getPassword().length() > 12 || profile.getUserID().length() > 35) {
 			//broadcast that respective field is too long
 			return "Login";
 		}
 		
-		if(accdao.isUserIdExists(account.getUserID())) {
+		if(profdao.isUserIdExists(profile.getUserID())) {
 			//check if password matches account
-			if(account.getPassword().contentEquals(accdao.getAccountByUserID(account.getUserID()).getPassword())) {
+			if(profile.getPassword().contentEquals(profdao.getProfileByUserID(profile.getUserID()).getPassword())) {
 				//login session user
-				sessionProfile = profdao.getProfileByUserID(account.getUserID());
+				sessionProfile = profdao.getProfileByUserID(profile.getUserID());
 				//authenticate
 				return "welcome";
 			}

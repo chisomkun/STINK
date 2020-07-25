@@ -8,19 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.stinkelectronics.helpdesk.model.Account;
 import com.stinkelectronics.helpdesk.model.Profile;
-import com.stinkelectronics.helpdesk.service.AccountDao;
 import com.stinkelectronics.helpdesk.service.ProfileDao;
 
 
 @Controller
 public class RegisterController {
-
-	@Autowired
-	private AccountDao accdao;
 
 	@Autowired
 	private ProfileDao profdao;
@@ -34,14 +28,13 @@ public class RegisterController {
 		user.add(new Account());
 		user.add(new Profile());
 		model.addAttribute("user", user);*/
-		model.addAttribute("account", new Account());
 		model.addAttribute("profile", new Profile());
 
 		return "Register";
 	}
 	
 	@PostMapping("/Register")
-	public String registerAccount(@ModelAttribute Account account, @ModelAttribute Profile profile) {
+	public String registerAccount(@ModelAttribute Profile profile) {
 		
 		//profile.setUserID(account.getUserID());
 		
@@ -53,7 +46,7 @@ public class RegisterController {
 		
 		//lengthcheck
 
-		if (!accdao.isUserIdExists(account.getUserID())) {
+		if (!profdao.isUserIdExists(profile.getUserID())) {
 			if(profdao.postProfile(profile)) {
 				return "Login";
 			}
