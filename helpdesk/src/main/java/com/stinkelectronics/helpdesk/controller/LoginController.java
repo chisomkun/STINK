@@ -32,6 +32,10 @@ public class LoginController {
 	//post login
 	@PostMapping("/Login")
 	public String loginPost(@ModelAttribute("profile") Profile profile, @ModelAttribute("sessionProfile") Profile sessionProfile) {
+		//debug purposes
+		System.out.println("UserID Entered: " + profile.getUserID());
+		System.out.println("Password Entered: " + profile.getPassword());
+		
 		//null check
 		if(profile.getPassword() == null || profile.getUserID() == null) {
 			//broadcast that required fields are left empty
@@ -51,16 +55,18 @@ public class LoginController {
 			if(profile.getPassword().contentEquals(profdao.getProfileByUserID(profile.getUserID()).getPassword())) {
 				//login session user
 				sessionProfile = profdao.getProfileByUserID(profile.getUserID());
-				//authenticate
+				System.out.println("Login Successful!");
 				return "welcome";
 			}
 			else {
 				//broadcast that password does not match userid
+				System.out.println("Login Failed: Wrong password");
 				return "Login";
 			}
 		}
 		else {
 			//broadcast that no such user with userID exists
+			System.out.println("Login Failed: User doesn't exist");
 			return "Login";
 		}
 	}

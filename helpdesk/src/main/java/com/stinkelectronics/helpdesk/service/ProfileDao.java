@@ -1,5 +1,7 @@
 package com.stinkelectronics.helpdesk.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataAccessException;
@@ -19,8 +21,15 @@ public class ProfileDao {
 	public Profile getProfileByUserID(String uid) {
 		Profile profile = new Profile();
 		try {
-			String query = "SELECT * FROM Profile WHERE UserID=?";
-			return jtemp.queryForObject(query, new Object[]{uid}, new ProfileRowMapper());
+			//String query = "SELECT * FROM Profile WHERE UserID=?";
+			String query = "SELECT * FROM Profile WHERE UserID='" + uid + "'";
+			List<Profile> profs = jtemp.query(query, new ProfileRowMapper());
+			if(profs.isEmpty()) {
+				System.out.println("No such record found");
+				return profile;
+			}
+			return profs.get(0);
+			//return jtemp.queryForObject(query, new Object[]{uid}, new ProfileRowMapper());
 		}
 		catch(DataAccessException e) {
 			System.out.println(e.getMessage());
@@ -69,8 +78,13 @@ public class ProfileDao {
 	//exists
 	public boolean isUserIdExists(String UserID) {
 		try {
-			String query = "SELECT * FROM Profile WHERE UserID=?";
-			int count = jtemp.queryForObject(query, new Object[] {UserID}, Integer.class);
+			String query = "SELECT * FROM Profile WHERE UserID='" + UserID + "'";
+			List<Profile> profs = jtemp.query(query, new ProfileRowMapper());
+			int count = 0;
+			if(!profs.isEmpty()) {
+				count = profs.size();
+			}
+			//int count = jtemp.queryForObject(query, new Object[] {UserID}, Integer.class);
 			return count > 0;
 		}
 		catch(DataAccessException ex) {
@@ -90,7 +104,7 @@ public class ProfileDao {
 					+ profile.getLastName() + "', '" 
 					+ profile.getEmail() + "', '"
 					+ profile.getPassword()
-					+ "', '1', '0')";
+					+ "', 1, 0)";
 			jtemp.execute(query);
 			return true;
 		}
