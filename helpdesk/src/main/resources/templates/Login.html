@@ -8,7 +8,7 @@
 <body>
     <div class="login-page">
     <div class="form">
-        <form th:action="@{/LoginPost}" th:object="${account}" method="post">
+        <form th:action="@{/Login}" th:object="${profile}" method="post">
             <label form="login-form">Login</label><br /><br />
             <input type="text" name="username" class="input-box" placeholder="Username" th:field="*{UserID}" required/>
             <input type="password" name="password" class="input-box" placeholder="password" th:field="*{Password}" required/>
