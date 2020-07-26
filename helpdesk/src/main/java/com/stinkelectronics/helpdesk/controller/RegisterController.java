@@ -18,8 +18,6 @@ public class RegisterController {
 
 	@Autowired
 	private ProfileDao profdao;
-	
-	private ArrayList<Object> user;
 
 	//get register
 	@GetMapping("/Register")
@@ -34,9 +32,7 @@ public class RegisterController {
 	}
 	
 	@PostMapping("/Register")
-	public String registerAccount(@ModelAttribute Profile profile) {
-		
-		//profile.setUserID(account.getUserID());
+	public String registerAccount(@ModelAttribute("profile") Profile profile) {
 		
 		//nullcheck
 		if (profile.getFirstName() == null || profile.getLastName() == null || profile.getUserID() == null) {

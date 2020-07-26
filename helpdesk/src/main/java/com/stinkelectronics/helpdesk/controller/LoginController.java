@@ -23,7 +23,7 @@ public class LoginController {
 	public Profile makeSessionProfile() {return new Profile();}
 	
 	//get login
-	@GetMapping("/")
+	@GetMapping("/Login")
 	public String loginForm(Model m, @ModelAttribute("sessionProfile") Profile sessionProfile) {
 		m.addAttribute("profile", new Profile());
 		return "Login";
@@ -31,7 +31,7 @@ public class LoginController {
 	
 	//post login
 	@PostMapping("/Login")
-	public String loginPost(@ModelAttribute Profile profile, @ModelAttribute("sessionProfile") Profile sessionProfile) {
+	public String loginPost(@ModelAttribute("profile") Profile profile, @ModelAttribute("sessionProfile") Profile sessionProfile) {
 		//null check
 		if(profile.getPassword() == null || profile.getUserID() == null) {
 			//broadcast that required fields are left empty

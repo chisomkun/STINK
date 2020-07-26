@@ -114,4 +114,37 @@ public class ProfileDao {
 			return false;
 		}
 	}
+	
+	//remove repair
+	public boolean removeRepair(String uid) {
+		try {
+			Profile profile = getProfileByUserID(uid);
+			if(profile.getRepairID() == 0) {
+				return true;
+			}
+			profile.setRepairID(0);
+			return true;
+		}
+		catch(DataAccessException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	//add repair
+	public boolean addRepair(String uid, int rid) {
+		try {
+			Profile profile = getProfileByUserID(uid);
+			if(profile.getRepairID() != 0) {
+				System.out.println("Users can only have one repair active at a time");
+				return false;
+			}
+			profile.setRepairID(rid);
+			return true;
+		}
+		catch(DataAccessException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 }
