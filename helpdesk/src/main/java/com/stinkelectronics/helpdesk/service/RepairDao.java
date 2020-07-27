@@ -1,5 +1,7 @@
 package com.stinkelectronics.helpdesk.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataAccessException;
@@ -18,8 +20,15 @@ public class RepairDao {
     public Repair getRepairByRepairID(int RepairID) {
         Repair repair = new Repair();
         try {
-            String queryr = "SELECT * FROM Repair WHERE RepairID=?";
-            return jtem.queryForObject(queryr, new Object[]{RepairID}, new RepairRowMapper());
+            //String queryr = "SELECT * FROM Repair WHERE RepairID=?";
+        	String query = "SELECT * FROM Repair WHERE RepairID='" + RepairID + "'";
+        	List<Repair> repairs = jtem.query(query, new RepairRowMapper());
+        	if(repairs.isEmpty()) {
+        		System.out.println("No such record found");
+        		return repair;
+        	}
+        	return repairs.get(0);
+            //return jtem.queryForObject(queryr, new Object[]{RepairID}, new RepairRowMapper());
         } catch (DataAccessException re) {
             System.out.println(re.getMessage());
             return repair;
@@ -43,7 +52,7 @@ public class RepairDao {
     public boolean removeRepair(int RepairID) {
     	
     	try {
-    		String remove = "REMOVE FROM Repair WHERE RepairID='" + RepairID+ "'";
+    		String remove = "DELETE FROM Repair WHERE RepairID='" + RepairID+ "'";
     		jtem.execute(remove);
     		return true;
     	}
@@ -57,7 +66,7 @@ public class RepairDao {
     	try {
     		String update = "UPDATE Repair " + 
     				"SET Status='"+ Status +"' " + 
-    				"WHERE CustomerID='" + RepairID + "'";
+    				"WHERE RepairID='" + RepairID + "'";
     		jtem.execute(update);
     		return true;
     	}

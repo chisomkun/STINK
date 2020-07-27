@@ -121,6 +121,32 @@ public class ProfileDao {
 					"SET " + columnName + "='"
 					+ update + "' "
 					+ "WHERE UserID='" + uid + "'";
+			jtemp.execute(sql);
+			return true;
+		}
+		catch(DataAccessException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean updateProfileRepair(String uid, int rid) {
+		try {
+			String sql = "UPDATE Profile SET RepairID='" + rid + "' WHERE UserID='" + uid + "'";
+			jtemp.execute(sql);
+			return true;
+		}
+		catch(DataAccessException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	//remove account
+	public boolean removeProfile(String uid) {
+		try {
+			String sql = "DELETE FROM Profile WHERE UserId='" + uid + "'";
+			jtemp.execute(sql);
 			return true;
 		}
 		catch(DataAccessException e) {
@@ -137,7 +163,7 @@ public class ProfileDao {
 				return true;
 			}
 			profile.setRepairID(0);
-			return true;
+			return updateProfileRepair(uid, 0);
 		}
 		catch(DataAccessException e) {
 			System.out.println(e.getMessage());
@@ -154,7 +180,7 @@ public class ProfileDao {
 				return false;
 			}
 			profile.setRepairID(rid);
-			return true;
+			return updateProfileRepair(uid, rid);
 		}
 		catch(DataAccessException e) {
 			System.out.println(e.getMessage());
